@@ -1,5 +1,24 @@
+
 {
-   "require": {
-    "leafo/lessphp": "v0.4.0"
-  }
+	"name" : "reticulas/template",
+	"type": "template",
+	"description": "Basic template to start reticulas-cssframework",
+	"keywords": [
+		"framework",
+		"css",
+		"less",
+		"styles"
+	],
+	"homepage": "http://cssframework.reticulas.com",
+	"license": "MIT",
+	"authors": [
+		{
+		"name": "Segundo Fdez",
+		"email": "hello@reticulas.com",
+		"homepage": "http://www.segundofdez.com"
+		}
+	],
+	"require": {
+    	"leafo/lessphp": "v0.4.0"
+  	}
 }
