@@ -17,6 +17,7 @@ Install
 
 3.  To finish you have to install [reticulas-cssframework][4]. You can do it with [bower][3]:
 	```bash
+	cd trunk
 	bower install
 	```
 4. This create a folder called vendor inside public with all that you need. As you can see, adds [less js][2] too if you want to use for client-side (modern browsers only).
