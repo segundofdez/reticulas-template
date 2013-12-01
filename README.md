@@ -71,6 +71,8 @@ what's inside
 	               <li>import.less (import files from reticulas-cssframework - Import your own style sheets if you want)</li>
 	               <li>reticulas.less (your styles goes here)</li>
 	               <li>styles.php (used by lessphp)</li>
+	               <li>import.scss (yo must generate import.css to use with sass)</li>
+	               <li>_reticulas.scss</li>
 	            </ul>
          	</li>
          	<li>index.html (basic template)</li>
