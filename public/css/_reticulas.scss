@@ -25,7 +25,7 @@
 
 // 1.2 Redefine values ------------------------------------------------------
 body{
-	color: $color-link;
+	color: $color;
 	//@extend .baseline;
 }
 
@@ -55,6 +55,7 @@ a {
 */
 #page {
 	width:$total-width;
+	@extend .clearfix;
 }
 
 /*
