@@ -1,7 +1,7 @@
 {
   "name":"reticulas-template",
   "dependencies": {
-    "reticulas-cssframework": "~2.1.0",
+    "reticulas-cssframework": "~2.1.1",
     "less": "v1.5.1"
   }
 }
