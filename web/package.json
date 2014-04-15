@@ -1,0 +1,31 @@
+{
+  "name": "reticulas-template",
+  "description": "Basic grunt template to start reticulas-cssframework",
+  "version": "0.1.0",
+  "author": {
+    "name": "Segundo Fdez | Sond3",
+    "url": "http://segundofdez.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/segundofdez/reticulas-template"
+  },
+  "keywords": [
+    "reticulas",
+    "javascript",
+    "css",
+    "template"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/segundofdez/reticulas-template/blob/master/MIT-LICENSE.txt"
+    }
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-less": "0.11.0",
+    "grunt-contrib-watch": "~0.6.1"
+  }
+}

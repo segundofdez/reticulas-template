@@ -1,4 +1,8 @@
 vendor/*
-public/vendor/*
+web/vendor/*
 composer.lock
+
 .DS_Store
+
+web/node_modules
+web/npm-debug.log
