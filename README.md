@@ -65,13 +65,13 @@ what's inside
 ----------
 
 <ul>
+	<li><strong>bin</strong>
+		<ul>
+			<li>Grunt config</li>
+		</ul>
+	</li>
 	<li><strong>web</strong>
 		<ul>
-			<li><strong>bin</strong>
-				<ul>
-					<li>Grunt config</li>
-				</ul>
-			</li>
 			<li><strong>css</strong>
 	            <ul>
 	               <li>import.less (import files from reticulas-cssframework - less - Import your own style sheets if you want)</li>
