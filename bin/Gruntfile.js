@@ -7,8 +7,8 @@ module.exports = function(grunt) {
 		// minimize js files
 		uglify: {
 			build: {
-				src: ['vendor/less/dist/less-1.7.0.min.js', 'js/main.js'], // js input
-	    		dest: 'js/build/main.min.js' //js output
+				src: ['../web/vendor/less/dist/less-1.7.0.min.js', '../web/js/main.js'], // js input
+	    		dest: '../web/js/build/main.min.js' //js output
 	  		}
 		},
 
@@ -20,20 +20,24 @@ module.exports = function(grunt) {
 	      			compress: true,
 	    		},
 	    		files: {
-	      			"css/build/styles.css": "css/import.less"
+	      			"../web/css/build/styles.css": "../web/css/import.less"
 	    		}
 	  		}
 		},
 
-		// Watch less styles
+		// Watch less and js
 		watch: {
 			css: {
-		    	files: ['css/*.less'],
+		    	files: ['../web/css/*.less'],
 				tasks: ['less'],
 		    	options: {
 		      		livereload: true,
 		    	},
 		  	},
+		  	 another: {
+				files: ['../web/js/main.js'],
+				tasks: ['uglify'],
+		    },
 		},
 
 	});

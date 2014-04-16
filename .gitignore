@@ -6,5 +6,5 @@ composer.lock
 
 .DS_Store
 
-web/node_modules
-web/npm-debug.log
+bin/node_modules
+bin/npm-debug.log
