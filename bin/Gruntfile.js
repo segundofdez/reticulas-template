@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 		      		livereload: true,
 		    	},
 		  	},
-		  	 another: {
+		  	another: {
 				files: ['../web/js/main.js'],
 				tasks: ['uglify'],
 		    },

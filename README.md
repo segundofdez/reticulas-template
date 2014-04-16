@@ -65,7 +65,12 @@ what's inside
 ----------
 
 <ul>
-	<li><strong>public</strong>
+	<li><strong>bin</strong>
+		<ul>
+			<li>Grunt config</li>
+		</ul>
+	</li>
+	<li><strong>web</strong>
 		<ul>
 			<li><strong>css</strong>
 	            <ul>
@@ -85,7 +90,11 @@ what's inside
         	</li>
       	</ul>
    	</li>
-    <li><strong>vendor</strong> (lessphp library if you want to use with php - http://leafo.net/lessphp/)</li>
+    <li><strong>vendor</strong>
+		<ul>
+			<li>lessphp library if you want to use with php - http://leafo.net/lessphp/</li>
+		</ul>
+    </li>
 </ul>
 
 
