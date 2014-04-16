@@ -1,4 +1,10 @@
 vendor/*
-public/vendor/*
+web/vendor/*
+web/css/build
+web/js/build
 composer.lock
+
 .DS_Store
+
+bin/node_modules
+bin/npm-debug.log
