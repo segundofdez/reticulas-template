@@ -90,7 +90,11 @@ what's inside
         	</li>
       	</ul>
    	</li>
-    <li><strong>vendor</strong> (lessphp library if you want to use with php - http://leafo.net/lessphp/)</li>
+    <li><strong>vendor</strong>
+		<ul>
+			<li>lessphp library if you want to use with php - http://leafo.net/lessphp/</li>
+		</ul>
+    </li>
 </ul>
 
 
