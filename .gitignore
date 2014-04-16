@@ -1,5 +1,7 @@
 vendor/*
 web/vendor/*
+web/css/build
+web/js/build
 composer.lock
 
 .DS_Store
