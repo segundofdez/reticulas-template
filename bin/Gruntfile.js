@@ -25,6 +25,21 @@ module.exports = function(grunt) {
 	  		}
 		},
 
+		// Image min
+		imagemin: {
+			static: {
+				options: {
+					optimizationLevel: 6
+				},
+				files: [{
+					  expand: true,
+					  cwd: '../web/media/img/',
+					  src: ['**/*.{png,jpg,gif}'],
+					  dest: '../web/media/img/build/'
+				}]
+			}
+		},
+
 		// Watch less and js
 		watch: {
 			css: {
@@ -48,11 +63,14 @@ module.exports = function(grunt) {
 	// Load the pluging that provides less task
 	grunt.loadNpmTasks('grunt-contrib-less');
 
+	// Load the plugin thah provides image min
+	grunt.loadNpmTasks('grunt-contrib-imagemin');
+
 	// Load the pluging that provides watch
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 
 	// Default task(s).
-	grunt.registerTask('default', ['uglify','less','watch']);
+	grunt.registerTask('default', ['uglify','less','imagemin','watch']);
 
 };
