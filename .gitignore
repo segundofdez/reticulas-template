@@ -3,6 +3,7 @@ web/vendor/*
 web/css/build
 web/js/build
 web/media/img/build
+web/index.min.html
 composer.lock
 
 .DS_Store

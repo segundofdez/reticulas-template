@@ -32,16 +32,32 @@ module.exports = function(grunt) {
 					optimizationLevel: 6
 				},
 				files: [{
-					  expand: true,
-					  cwd: '../web/media/img/',
-					  src: ['**/*.{png,jpg,gif}'],
-					  dest: '../web/media/img/build/'
+					expand: true,
+					cwd: '../web/media/img/',
+					src: ['**/*.{png,jpg,gif}', '!build/**'],
+					dest: '../web/media/img/build/'
 				}]
+			}
+		},
+
+		// Html min
+		htmlmin: {
+			dist: {
+				options: {
+					removeComments: true,
+					collapseWhitespace: true
+				},
+				files: {
+					'../web/index.min.html': '../web/index.html'
+				}
 			}
 		},
 
 		// Watch less and js
 		watch: {
+			html:{
+				files: ['../web/*.html']
+			},
 			css: {
 		    	files: ['../web/css/*.less'],
 				tasks: ['less'],
@@ -57,20 +73,23 @@ module.exports = function(grunt) {
 
 	});
 
-	// Load the plugin that provides the "uglify" task.
+	// Load the plugin that provides the uglify task.
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 
 	// Load the pluging that provides less task
 	grunt.loadNpmTasks('grunt-contrib-less');
 
-	// Load the plugin thah provides image min
+	// Load the plugin thah provides image min task
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 
-	// Load the pluging that provides watch
+	// Load the plugin thah provides html min task
+	grunt.loadNpmTasks('grunt-contrib-htmlmin');
+
+	// Load the pluging that provides watch task
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 
 	// Default task(s).
-	grunt.registerTask('default', ['uglify','less','imagemin','watch']);
+	grunt.registerTask('default', ['uglify','less','imagemin', 'htmlmin', 'watch']);
 
 };
