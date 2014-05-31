@@ -41,33 +41,22 @@ Install
    * After download the latest stable version of reticulas-template, inside "public" create the directory structure "vendor/less/dist"
    * Download [lessjs][2]. Copy the file 'less.js' and paste inside "public/vendor/less/dist"
 
-
-How to use with lessphp
------------------------
-Link the styles.php:
-```HTML
-<link rel="stylesheet" href="css/styles.php">
-```
-How to use with lessjs
-----------------------
-Link the import.less stylesheets with the rel set to “stylesheet/less”:
-
-```HTML
-<link rel="stylesheet/less" href="css/import.less">
-```
-and include the less.js in the ```  <head> ``` element of your page, like so:
-
-```HTML
-<script src="vendor/less/dist/less-1.5.1.min.js" type="text/javascript"></script>
-```
-
 what's inside
 ----------
 
 <ul>
 	<li><strong>bin</strong>
 		<ul>
-			<li>Grunt config</li>
+			<li>
+				<strong>Grunt</strong>
+				<ul>
+					<li>uglify</li>
+					<li>less</li>
+					<li>imagemin</li>
+					<li>htmlmin</li>
+					<li>watch</li>
+				</ul>
+			</li>
 		</ul>
 	</li>
 	<li><strong>web</strong>
@@ -86,6 +75,7 @@ what's inside
 	         	<ul>
 	         		<li><strong>reticulas-cssframework</strong> (https://github.com/segundofdez/reticulas-cssframework)</li>
 	         		<li><strong>less</strong> (lesscss library if you want to use with js - http://lesscss.org/)</li>
+	         		<li><strong>jQuery</strong> (jQuery is a fast, small, and feature-rich JavaScript library - http://jquery.com/</li>
 	         	</ul>
         	</li>
       	</ul>
