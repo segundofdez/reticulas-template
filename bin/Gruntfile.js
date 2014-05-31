@@ -6,15 +6,34 @@ module.exports = function(grunt) {
 
 		// minimize js files
 		uglify: {
-			build: {
-				src: ['../web/vendor/less/dist/less-1.7.0.min.js', '../web/js/main.js'], // js input
-	    		dest: '../web/js/build/main.min.js' //js output
+	  		development: {
+				src: ['../web/vendor/less/dist/less-1.7.0.min.js','../web/vendor/jQuery/dist/jquery.min.js', '../web/js/main.js'], // js input
+	    		dest: '../web/js/build/main.min.js', //js output
+
+		  		options: {
+			        beautify: {
+			         	width: 80,
+			        	beautify: true
+			        }
+			    }
+	  		},
+			production: {
+				src: ['../web/vendor/less/dist/less-1.7.0.min.js','../web/vendor/jQuery/dist/jquery.min.js', '../web/js/main.js'], // js input
+	    		dest: '../web/js/build/main.min.js' //js output,
 	  		}
 		},
 
 		// less to css
 		less: {
-			development: {
+	  		development: {
+	    		options: {
+	    			paths: ["css"],
+	    		},
+	    		files: {
+	      			"../web/css/build/styles.css": "../web/css/import.less"
+	    		}
+	  		},
+			production: {
 	    		options: {
 	    			paths: ["css"],
 	      			compress: true,
@@ -70,7 +89,6 @@ module.exports = function(grunt) {
 				tasks: ['uglify'],
 		    },
 		},
-
 	});
 
 	// Load the plugin that provides the uglify task.
@@ -89,7 +107,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 
-	// Default task(s).
-	grunt.registerTask('default', ['uglify','less','imagemin', 'htmlmin', 'watch']);
+	// Development task(s).
+	grunt.registerTask('dev', ['uglify:development','less:development', 'watch']);
+
+	// Final production task(s).
+	grunt.registerTask('prod', ['uglify:production','less:production','imagemin', 'htmlmin', 'watch']);
 
 };
