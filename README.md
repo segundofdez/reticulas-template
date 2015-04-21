@@ -13,7 +13,13 @@ Install
 	composer create-project reticulas/template trunk -s dev
 	```
 
-2.  Install dependencies:
+2.  Install node dependencies:
+	```bash
+	cd trunk
+	npm install
+	```
+
+3.  Install bower dependencies:
 	```bash
 	cd trunk
 	bower install
