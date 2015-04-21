@@ -1,8 +1,9 @@
 {
   "name":"reticulas-template",
   "dependencies": {
+  	"normalize-css":"^3.0.2",
     "reticulas-cssframework": "~2.1.2",
-    "less": "1.7.0",
-    "jQuery": "v1.11.1"
+    "less": "2.5.0",
+    "jQuery": "v1.11.2"
   }
 }

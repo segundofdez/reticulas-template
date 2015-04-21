@@ -1,12 +1,12 @@
 vendor/*
-web/vendor/*
-web/css/build
-web/js/build
-web/media/img/build
-web/index.min.html
+public/vendor/*
+public/css/build
+public/js/build
+public/media/img/build
+public/index.min.html
 composer.lock
 
 .DS_Store
 
-bin/node_modules
-bin/npm-debug.log
+node_modules
+npm-debug.log

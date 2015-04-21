@@ -16,8 +16,5 @@
 		"email": "hello@reticulas.com",
 		"homepage": "http://www.segundofdez.com"
 		}
-	],
-	"require": {
-    	"leafo/lessphp": "v0.4.0"
-  	}
+	]
 }
