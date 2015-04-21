@@ -1,6 +1,6 @@
 vendor/*
 public/vendor/*
-public/css/build
+public/styles/build
 public/js/build
 public/media/img/build
 public/index.min.html
