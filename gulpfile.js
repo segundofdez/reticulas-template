@@ -30,7 +30,7 @@ gulp.task('watch', function () {
 });
 
 /**
-* Task styles: errors, autoprefixer, minified, rename, sourcemap and notify
+* Task styles: errors, autoprefixer, minified, rename, sourcemap, notify and livereload
 */
 gulp.task('styles', function () {
     var less_src_import = 'public/styles/main.less';
