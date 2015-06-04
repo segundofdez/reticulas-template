@@ -2,6 +2,7 @@ vendor/*
 public/vendor/*
 public/media/img/build
 composer.lock
+styleguide
 
 .DS_Store
 

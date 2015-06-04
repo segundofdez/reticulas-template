@@ -11,6 +11,10 @@ var livereload = require('gulp-livereload');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 
+// test generate styleguide
+var styleguide = require('sc5-styleguide');
+var outputPath = 'styleguide';
+
 /**
 * Gulp errors
 */
@@ -72,3 +76,29 @@ gulp.task('js', function () {
         .pipe(notify({message:"Js minified"})
     );
 });
+
+
+/**
+* Task styleguide to generate styleguide
+*/
+gulp.task('styleguide:generate', function() {
+  return gulp.src('public/styles/**/*.less')
+    .pipe(styleguide.generate({
+        title: 'My Styleguide',
+        server: true,
+        rootPath: outputPath,
+        overviewPath: 'README.md'
+      }))
+    .pipe(gulp.dest(outputPath));
+});
+
+gulp.task('styleguide:applystyles', function() {
+  return gulp.src('public/styles/main.less')
+    .pipe(less({
+      errLogToConsole: true
+    }))
+    .pipe(styleguide.applyStyles())
+    .pipe(gulp.dest(outputPath));
+});
+
+gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
