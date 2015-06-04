@@ -1,9 +1,6 @@
 vendor/*
 public/vendor/*
-public/css/build
-public/js/build
 public/media/img/build
-public/index.min.html
 composer.lock
 
 .DS_Store

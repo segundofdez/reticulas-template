@@ -10,7 +10,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var livereload = require('gulp-livereload');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
-//var kss = require('gulp-kss');
 
 /**
 * Gulp errors
@@ -30,7 +29,7 @@ gulp.task('watch', function () {
 });
 
 /**
-* Task styles: errors, autoprefixer, minified, rename, sourcemap and notify
+* Task styles: errors, autoprefixer, minified, rename, sourcemap, notify and livereload
 */
 gulp.task('styles', function () {
     var less_src_import = 'public/styles/main.less';
@@ -47,12 +46,12 @@ gulp.task('styles', function () {
             .pipe(rename({suffix: '.min'}))
         .pipe(sourcemaps.write("./"))
         .pipe(gulp.dest(less_dest_folder))
-        .pipe(notify("Less Compiled, Prefixed and Minified"))
+        .pipe(notify("Less compiled, prefixed and minified"))
         .pipe(livereload())
 });
 
 /**
-* Task js minified
+* Task js concat and minified
 */
 gulp.task('js', function () {
 
