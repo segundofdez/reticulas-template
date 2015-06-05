@@ -22,24 +22,26 @@ Basic template to start [reticulas-cssframework][4]
 
 ## Gulp tasks
 
-	```bash
-	gulp watch
-	```
 	html: livereload
 	styles: errors, autoprefixer, minified, rename, sourcemap, notify and livereload
 	js: concat, minified and notify
 
 
 	```bash
-	gulp images
+	gulp watch
 	```
+
 	Optimize images (png, jpg, gif and svg) with gulp-imagemin
 
+	```bash
+	gulp images
+	```
+
+	Generate styleguide with sc5-styleguide
 
 	```bash
 	gulp styleguide
 	```
-	Generate styleguide with sc5-styleguide
 
 
 
