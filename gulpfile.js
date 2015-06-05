@@ -11,6 +11,14 @@ var livereload = require('gulp-livereload');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 
+// image optimization
+var imagemin = require('gulp-imagemin');
+
+// test generate styleguide
+var styleguide = require('sc5-styleguide');
+var outputPath = 'styleguide';
+
+
 /**
 * Gulp errors
 */
@@ -19,6 +27,7 @@ function swallowError (error) {
     this.emit('end');
 }
 
+
 /**
 * Task watch
 */
@@ -26,6 +35,16 @@ gulp.task('watch', function () {
     livereload.listen();
     gulp.watch(['public/styles/**/*.less', 'public/styles/**/*.css'], ['styles']);
     gulp.watch('public/js/**/*.js', ['js']);
+    gulp.watch('public/**/*.html', ['html']);
+});
+
+
+/**
+* Html livereload
+*/
+gulp.task('html', function() {
+    return gulp.src(['public/**/*.html'])
+    .pipe(livereload());
 });
 
 /**
@@ -50,6 +69,7 @@ gulp.task('styles', function () {
         .pipe(livereload())
 });
 
+
 /**
 * Task js concat and minified
 */
@@ -72,3 +92,50 @@ gulp.task('js', function () {
         .pipe(notify({message:"Js minified"})
     );
 });
+
+
+/**
+* Task images optimize images with gulp-imagemin
+*/
+// Delete the build images directory
+gulp.task('cleanimages', function() {
+    return gulp.src('public/media/img/build')
+    .pipe(clean());
+});
+
+gulp.task('images',['cleanimages'], function () {
+    return gulp.src('public/media/img/**/*')
+        .pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}]
+        }))
+        .pipe(gulp.dest('public/media/img/build'))
+        .pipe(notify({ message: 'Optimized images' }));
+});
+
+
+/**
+* Task styleguide to generate styleguide
+*/
+gulp.task('styleguide:generate', function() {
+  return gulp.src('public/styles/**/*.less')
+    .pipe(styleguide.generate({
+        title: 'My Styleguide',
+        server: true,
+        rootPath: outputPath,
+        overviewPath: 'README.md'
+      }))
+    .pipe(gulp.dest(outputPath));
+});
+
+gulp.task('styleguide:applystyles', function() {
+  return gulp.src('public/styles/main.less')
+    .pipe(less({
+      errLogToConsole: true
+    }))
+    .pipe(styleguide.applyStyles())
+    .pipe(gulp.dest(outputPath));
+});
+
+gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
+
