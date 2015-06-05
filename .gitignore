@@ -1,6 +1,5 @@
 vendor/*
 public/vendor/*
-public/media/img/build/*
 composer.lock
 
 .DS_Store
