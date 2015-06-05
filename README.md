@@ -23,9 +23,9 @@ Basic template to start [reticulas-cssframework][4]
 ## Gulp tasks
 
 1.	html: livereload
-	
+
 	styles: errors, autoprefixer, minified, rename, sourcemap, notify and livereload
-	
+
 	js: concat, minified and notify
 	```bash
 	gulp watch
