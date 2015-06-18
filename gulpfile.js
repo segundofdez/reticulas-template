@@ -6,6 +6,7 @@ var minifycss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var notify = require('gulp-notify');
 var watch = require('gulp-watch');
+var htmlmin = require('gulp-htmlmin');
 var sourcemaps = require('gulp-sourcemaps');
 var livereload = require('gulp-livereload');
 var clean = require('gulp-clean');
@@ -36,14 +37,23 @@ gulp.task('watch', function () {
     gulp.watch(['public/styles/**/*.less', 'public/styles/**/*.css'], ['styles']);
     gulp.watch('public/js/**/*.js', ['js']);
     gulp.watch('public/**/*.html', ['html']);
+    gulp.watch('public/media/img/**/*', ['images']);
 });
 
 
 /**
 * Html livereload
 */
-gulp.task('html', function() {
+gulp.task('htmlclean', function() {
+    return gulp.src(['public/dist/**/*.html'])
+    .pipe(clean());
+});
+
+
+gulp.task('html',['htmlclean'], function() {
     return gulp.src(['public/**/*.html'])
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('public/dist/'))
     .pipe(livereload());
 });
 
@@ -52,7 +62,8 @@ gulp.task('html', function() {
 */
 gulp.task('styles', function () {
     var less_src_import = 'public/styles/main.less';
-    var less_dest_folder = 'public/styles/build/';
+    var less_dest_folder = 'public/styles/';
+    var less_dest_dist_folder = 'public/dist/styles/';
 
     var minOpts = {processImport:true, keepSpecialComments:false};
 
@@ -65,6 +76,7 @@ gulp.task('styles', function () {
             .pipe(rename({suffix: '.min'}))
         .pipe(sourcemaps.write("./"))
         .pipe(gulp.dest(less_dest_folder))
+        .pipe(gulp.dest(less_dest_dist_folder))
         .pipe(notify("Less compiled, prefixed and minified"))
         .pipe(livereload())
 });
@@ -75,7 +87,7 @@ gulp.task('styles', function () {
 */
 gulp.task('js', function () {
 
-    var dest_folder = 'public/js/build/';
+    var dest_folder = 'public/dist/js/';
 
     gulp.src(dest_folder + '/*', {read: false}).pipe(clean({force: true}));
 
@@ -99,7 +111,7 @@ gulp.task('js', function () {
 */
 // Delete the build images directory
 gulp.task('cleanimages', function() {
-    return gulp.src('public/media/img/build')
+    return gulp.src('public/dist/media/img/')
     .pipe(clean());
 });
 
@@ -109,7 +121,7 @@ gulp.task('images',['cleanimages'], function () {
             progressive: true,
             svgoPlugins: [{removeViewBox: false}]
         }))
-        .pipe(gulp.dest('public/media/img/build'))
+        .pipe(gulp.dest('public/dist/media/img/'))
         .pipe(notify({ message: 'Optimized images' }));
 });
 

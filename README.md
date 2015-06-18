@@ -8,38 +8,48 @@ Basic template to start [reticulas-cssframework][4]
 ## Install
 
 
-1.	Install with [composer][1] create-project on trunk folder:
-	```bash
-	composer create-project reticulas/template trunk -s dev
-	```
+1.  Install with [composer][1] create-project on trunk folder:
+    ```bash
+    composer create-project reticulas/template trunk -s dev
+    ```
 
 2.  Install [node][5] and [bower][3] dependencies:
-	```bash
-	cd trunk
-	npm install
-	bower install
-	```
+    ```bash
+    cd trunk
+    npm install
+    bower install
+    ```
 
 ## Gulp tasks
 
-1.	html: livereload
+1.  Generate dist folder
 
-	styles: errors, autoprefixer, minified, rename, sourcemap, notify and livereload
+    html: livereload and minified
 
-	js: concat, minified and notify
-	```bash
-	gulp watch
-	```
+    styles: errors, autoprefixer, minified, rename, sourcemap, notify and livereload
 
-2.	Optimize images (png, jpg, gif and svg) with gulp-imagemin
-	```bash
-	gulp images
-	```
+    js: concat, minified and notify
 
-3.	Generate styleguide with sc5-styleguide
-	```bash
-	gulp styleguide
-	```
+    Optimize images (png, jpg, gif and svg) with gulp-imagemin
+
+    ```bash
+    gulp watch
+    ```
+
+2.  styles: errors, autoprefixer, minified, rename, sourcemap, notify and livereload
+    ```bash
+    gulp styles
+    ```
+
+3.  Optimize images (png, jpg, gif and svg) with gulp-imagemin
+    ```bash
+    gulp images
+    ```
+
+4.  Generate styleguide with sc5-styleguide
+    ```bash
+    gulp styleguide
+    ```
 
 
 
