@@ -1,16 +1,21 @@
+// common
 var gulp = require('gulp');
 var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var clean = require('gulp-clean');
+var uglify = require('gulp-uglify');
+var watch = require('gulp-watch');
+var livereload = require('gulp-livereload');
+var notify = require('gulp-notify');
+
+// styles
 var less = require('gulp-less');
 var autoprefixer = require('gulp-autoprefixer');
 var minifycss = require('gulp-minify-css');
-var rename = require('gulp-rename');
-var notify = require('gulp-notify');
-var watch = require('gulp-watch');
-var htmlmin = require('gulp-htmlmin');
 var sourcemaps = require('gulp-sourcemaps');
-var livereload = require('gulp-livereload');
-var clean = require('gulp-clean');
-var uglify = require('gulp-uglify');
+
+// html
+var htmlmin = require('gulp-htmlmin');
 
 // image optimization
 var imagemin = require('gulp-imagemin');
@@ -42,7 +47,7 @@ gulp.task('watch', function () {
 
 
 /**
-* Html livereload
+* Html minified and livereload
 */
 gulp.task('htmlclean', function() {
     return gulp.src(['public/dist/**/*.html'])
@@ -56,6 +61,7 @@ gulp.task('html',['htmlclean'], function() {
     .pipe(gulp.dest('public/dist/'))
     .pipe(livereload());
 });
+
 
 /**
 * Task styles: errors, autoprefixer, minified, rename, sourcemap, notify and livereload
@@ -150,4 +156,3 @@ gulp.task('styleguide:applystyles', function() {
 });
 
 gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
-
