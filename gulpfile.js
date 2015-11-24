@@ -156,3 +156,10 @@ gulp.task('styleguide:applystyles', function() {
 });
 
 gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
+
+
+
+/**
+* Task for production
+*/
+gulp.task('prod', ['styles', 'js', 'html', 'images']);
