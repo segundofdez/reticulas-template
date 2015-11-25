@@ -46,7 +46,12 @@ Basic template to start [reticulas-cssframework][4]
     gulp images
     ```
 
-4.  Generate styleguide with sc5-styleguide
+4.  Generate files for production
+    ```bash
+    gulp prod
+    ```
+
+5.  Generate styleguide with sc5-styleguide (This is in active development. Not ready yet.)
     ```bash
     gulp styleguide
     ```
