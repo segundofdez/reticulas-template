@@ -1,42 +1,37 @@
 {
-  "name": "reticulas-template",
-  "description": "Basic template to start reticulas-cssframework",
-  "version": "0.3.10",
-  "author": {
-    "name": "Segundo Fdez | Sond3",
-    "url": "http://segundofdez.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/segundofdez/reticulas-template"
-  },
-  "keywords": [
-    "reticulas",
-    "javascript",
-    "css",
-    "template"
-  ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/segundofdez/reticulas-template/blob/master/MIT-LICENSE.txt"
+    "name": "reticulas-template",
+    "description": "Basic template to start reticulas-cssframework",
+    "version": "0.3.10",
+    "author": {
+        "name": "Segundo Fdez | Sond3",
+        "url": "http://segundofdez.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/segundofdez/reticulas-template"
+    },
+    "keywords": [
+        "reticulas",
+        "javascript",
+        "css",
+        "template"
+    ],
+    "homepage": "https://github.com/oscarotero/Embed",
+    "license" : "MIT",
+    "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-less": "^3.0.5",
+        "gulp-autoprefixer": "^3.0.0",
+        "gulp-minify-css": "^1.2.1",
+        "gulp-sourcemaps": "1.6.0",
+        "gulp-htmlmin": "1.2.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-concat": "^2.6.0",
+        "gulp-uglify": "^1.5.1",
+        "del": "2.1.0",
+        "gulp-notify": "^2.2.0",
+        "gulp-watch": "^4.3.5",
+        "gulp-imagemin": "2.4.0",
+        "browser-sync": "2.10.0"
     }
-  ],
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-less": "^3.0.5",
-    "gulp-autoprefixer": "^3.0.0",
-    "gulp-minify-css": "^1.2.1",
-    "gulp-sourcemaps": "1.5.2",
-    "gulp-htmlmin": "1.2.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-concat": "^2.6.0",
-    "gulp-uglify": "^1.5.1",
-    "gulp-clean": "^0.3.0",
-    "gulp-notify": "^2.2.0",
-    "gulp-livereload": "3.8.1",
-    "gulp-watch": "^4.3.5",
-    "gulp-imagemin": "2.4.0",
-    "sc5-styleguide": "0.3.40"
-  }
 }
