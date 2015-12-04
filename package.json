@@ -1,7 +1,7 @@
 {
   "name": "reticulas-template",
   "description": "Basic template to start reticulas-cssframework",
-  "version": "0.3.10",
+  "version": "0.4.0",
   "author": {
     "name": "Segundo Fdez | Sond3",
     "url": "http://segundofdez.com"
@@ -16,7 +16,7 @@
     "css",
     "template"
   ],
-  "homepage": "https://github.com/oscarotero/Embed",
+  "homepage": "https://github.com/segundofdez/reticulas-template",
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "2.10.0",
@@ -32,6 +32,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.1",
     "run-sequence": ">=1.1.5",
+    "gulp-sourcemaps": "1.6.0",
     "gulp-watch": "^4.3.5"
   }
 }

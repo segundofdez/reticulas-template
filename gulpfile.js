@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     less = require('gulp-less');
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
+    sourcemaps = require('gulp-sourcemaps'),
 
     // html
     htmlmin = require('gulp-htmlmin'),
@@ -48,7 +49,7 @@ gulp.task('browserSync', function() {
 
 
 /**
-* Task less: less, errors, autoprefixer, minified, rename, notify, browserSync
+* Task less: less, errors, autoprefixer, minified, rename, notify, sourcemaps and browserSync
 */
 gulp.task('less', function () {
     var less_src_import = 'public/styles/main.less';
@@ -61,9 +62,11 @@ gulp.task('less', function () {
         .on('error', swallowError)
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
         .pipe(minifycss(minOpts))
+        .pipe(sourcemaps.init())
         .pipe(rename({
             suffix: '.min'
         }))
+        .pipe(sourcemaps.write("./"))
         .pipe(gulp.dest(less_dest_folder))
         .pipe(notify("Less compiled, prefixed and minified"))
         .pipe(browserSync.reload({
@@ -83,9 +86,10 @@ gulp.task('js', function () {
     var src = [];
 
     for(var item in vendorJs.js) {
-        console.log(vendorJs.js[item].src);
         src.push(vendorJs.js[item].src);
     }
+
+    del('public/js/main.min.js');
 
     return gulp.src(src)
         .on('error', swallowError)
@@ -93,6 +97,9 @@ gulp.task('js', function () {
         .pipe(uglify())
         .pipe(gulp.dest(dest_folder))
         .pipe(notify({message:"Compress js"})
+        .pipe(browserSync.reload({
+            stream: true
+        }))
     );
 });
 
@@ -101,14 +108,14 @@ gulp.task('js', function () {
 * Delete dist folder
 */
 gulp.task('del-dist', function() {
-    del('public/dist/*');
+    del('public/dist/**/*');
 });
 
 /**
 * Less minified to dist folder
 */
 gulp.task('less-dist', function() {
-    gulp.src('public/styles/main.min.css')
+    gulp.src(['public/styles/main.min.css', 'public/styles/main.min.css.map'])
     .pipe(gulp.dest('public/dist/styles'));
 });
 
@@ -132,7 +139,7 @@ gulp.task('html-dist', function() {
         minifyJS: true,
         minifyCSS: true
     }))
-    .pipe(gulp.dest('public/dist/'))
+    .pipe(gulp.dest('public/dist/'));
 });
 
 /**
@@ -146,21 +153,29 @@ gulp.task('images-dist',function(){
         progressive: true,
         svgoPlugins: [{removeViewBox: false}]
     }))
-    .pipe(gulp.dest(images_dest_folder))
-    .pipe(browserSync.reload({
-        stream: true
-    }))
+    .pipe(gulp.dest(images_dest_folder));
 });
+
+/**
+* Task server-dist: copy server files to dist folder
+*/
+gulp.task('server-dist', function() {
+    gulp.src(['public/humans.txt', 'public/robots.txt', 'public/.htaccess'])
+    .pipe(gulp.dest('public/dist/'));
+});
+
 
 /**
 * Task make-dist: create dist folder
 */
-gulp.task('make-dist', function(callback) {
+gulp.task('dist', function(callback) {
     runSequence(
+        'del-dist',
         'less-dist',
         'js-dist',
         'html-dist',
         'images-dist',
+        'server-dist',
         callback
     );
 });
@@ -172,12 +187,5 @@ gulp.task('make-dist', function(callback) {
 gulp.task('watch', ['browserSync'], function () {
     gulp.watch(['public/styles/**/*.less'], ['less']);
     gulp.watch('public/**/*.html', browserSync.reload);
-    gulp.watch('public/js/main.min.js', browserSync.reload);
-    //gulp.watch(['public/js/**/*.js','public/js/**/*.json'],['js']).on('change', browserSync.reload);
+    gulp.watch(['public/js/main.js', 'public/js/js.json'], ['js']);
 });
-
-
-/**
-* Task dist: Copy to dist folder for production
-*/
-gulp.task('dist', ['del-dist', 'make-dist']);

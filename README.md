@@ -20,43 +20,32 @@ Basic template to start [reticulas-cssframework][4]
     bower install
     ```
 
+
 ## Gulp tasks
 
-1.  Generate dist folder
+1.  Watch the app
 
-    html: livereload and minified
+    Run a server
 
-    styles: errors, autoprefixer, minified, rename, sourcemap, notify and livereload
-
-    js: concat, minified and notify
-
-    Optimize images (png, jpg, gif and svg) with gulp-imagemin
+    Browser sync: less, html, js
 
     ```bash
     gulp watch
     ```
 
-2.  styles: errors, autoprefixer, minified, rename, sourcemap, notify and livereload
+2.  Generate dist folder
+
+    html: minified
+
+    styles: errors, autoprefixer, minified, sourcemap
+
+    js: concat, minified
+
+    Optimize images (png, jpg, gif and svg)
+
     ```bash
-    gulp styles
+    gulp dist
     ```
-
-3.  Optimize images (png, jpg, gif and svg) with gulp-imagemin
-    ```bash
-    gulp images
-    ```
-
-4.  Generate files for production
-    ```bash
-    gulp prod
-    ```
-
-5.  Generate styleguide with sc5-styleguide (This is in active development. Not ready yet.)
-    ```bash
-    gulp styleguide
-    ```
-
-
 
 [1]:http://getcomposer.org/
 [2]:http://lesscss.org/
