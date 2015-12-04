@@ -1,0 +1,6 @@
+{
+   "js" : [
+        { "src" : "public/vendor/jQuery/dist/jquery.min.js" },
+        { "src" : "public/js/main.js" }
+    ]
+}

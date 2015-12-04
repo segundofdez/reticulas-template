@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     del = require('del'),
     watch = require('gulp-watch'),
     notify = require('gulp-notify'),
+    runSequence = require('run-sequence'),
 
     // styles
     less = require('gulp-less');
@@ -21,6 +22,7 @@ var gulp = require('gulp'),
 
     // js
     concat = require('gulp-concat'),
+    fs = require('fs'),
     uglify = require('gulp-uglify');
 
 
@@ -48,16 +50,6 @@ gulp.task('browserSync', function() {
 /**
 * Task less: less, errors, autoprefixer, minified, rename, notify, browserSync
 */
-
-gulp.task('lessclean', function() {
-    return del('public/dist/styles');
-});
-
-gulp.task('less-dist',['lessclean'], function() {
-   gulp.src('public/styles/main.min.css')
-   .pipe(gulp.dest('public/dist/styles'));
-});
-
 gulp.task('less', function () {
     var less_src_import = 'public/styles/main.less';
     var less_dest_folder = 'public/styles/';
@@ -76,74 +68,9 @@ gulp.task('less', function () {
         .pipe(notify("Less compiled, prefixed and minified"))
         .pipe(browserSync.reload({
             stream: true
-        }))
+        })
+    )
 });
-
-
-/**
-* Html minified to disc folder
-*/
-gulp.task('htmlclean', function() {
-    return del('public/dist/**/*.html');
-});
-
-gulp.task('html-dist',['htmlclean'], function() {
-    return gulp.src(['public/**/*.html'])
-    .pipe(htmlmin({
-        removeComments: true,
-        collapseWhitespace: true,
-        removeEmptyElements: true,
-        minifyJS: true,
-        minifyCSS: true
-    }))
-    .pipe(gulp.dest('public/dist/'))
-});
-
-
-/**
-* Task images: optimize images to dist folder
-*/
-gulp.task('imagesclean', function() {
-    return del('public/dist/media/img/**/*');
-});
-gulp.task('images-dist',['imagesclean'], function(){
-    var images_dest_folder = 'public/dist/media/img/';
-
-    return gulp.src('public/media/img/**/*.+(png|jpg|jpeg|gif|svg)')
-        .pipe(imagemin({
-            progressive: true,
-            svgoPlugins: [{removeViewBox: false}]
-        }))
-        .pipe(gulp.dest(images_dest_folder))
-        .pipe(browserSync.reload({
-            stream: true
-        }))
-});
-
-
-/**
-* Task gulp-watch
-*/
-gulp.task('watch', ['browserSync', 'less'], function () {
-    gulp.watch(['public/styles/**/*.less'], ['less']);
-    //gulp.watch(['public/styles/**/*.less', 'public/styles/**/*.css'], ['styles']);
-    gulp.watch('public/**/*.html',  browserSync.reload);
-    //gulp.watch('public/js/**/*.js',['js'], browserSync.reload);
-    gulp.watch('public/media/img/**/*', ['images-dist']);
-});
-
-
-/**
-* Task dist: Copy to dist folder for production
-*/
-gulp.task('dist', ['less-dist', 'html-dist', 'images-dist']);
-
-
-
-
-
-
-
 
 
 /**
@@ -152,19 +79,37 @@ gulp.task('dist', ['less-dist', 'html-dist', 'images-dist']);
 gulp.task('js', function () {
 
     var dest_folder = 'public/js/';
-
+    var vendorJs = JSON.parse(fs.readFileSync('./public/js/js.json'));
     var src = [];
 
-    src.push('public/vendor/jQuery/dist/jquery.min.js');
-    src.push('public/js/main.js');
+    for(var item in vendorJs.js) {
+        console.log(vendorJs.js[item].src);
+        src.push(vendorJs.js[item].src);
+    }
 
     return gulp.src(src)
         .on('error', swallowError)
         .pipe(concat('main.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest(dest_folder))
-        .pipe(notify({message:"Js minified"})
+        .pipe(notify({message:"Compress js"})
     );
+});
+
+
+/**
+* Delete dist folder
+*/
+gulp.task('del-dist', function() {
+    del('public/dist/*');
+});
+
+/**
+* Less minified to dist folder
+*/
+gulp.task('less-dist', function() {
+    gulp.src('public/styles/main.min.css')
+    .pipe(gulp.dest('public/dist/styles'));
 });
 
 /**
@@ -175,21 +120,64 @@ gulp.task('js-dist', function() {
    .pipe(gulp.dest('public/dist/js'));
 });
 
+/**
+* Html minified to dist folder
+*/
+gulp.task('html-dist', function() {
+    return gulp.src(['public/**/*.html', '!public/dist/**/*'])
+    .pipe(htmlmin({
+        removeComments: true,
+        collapseWhitespace: true,
+        removeEmptyElements: true,
+        minifyJS: true,
+        minifyCSS: true
+    }))
+    .pipe(gulp.dest('public/dist/'))
+});
+
+/**
+* Task images-dist: optimize images to dist folder
+*/
+gulp.task('images-dist',function(){
+    var images_dest_folder = 'public/dist/media/img/';
+
+    return gulp.src('public/media/img/**/*.+(png|jpg|jpeg|gif|svg)')
+    .pipe(imagemin({
+        progressive: true,
+        svgoPlugins: [{removeViewBox: false}]
+    }))
+    .pipe(gulp.dest(images_dest_folder))
+    .pipe(browserSync.reload({
+        stream: true
+    }))
+});
+
+/**
+* Task make-dist: create dist folder
+*/
+gulp.task('make-dist', function(callback) {
+    runSequence(
+        'less-dist',
+        'js-dist',
+        'html-dist',
+        'images-dist',
+        callback
+    );
+});
 
 
 /**
-* Task clean: delete dist folder before make the building for production
-
-gulp.task('clean', function() {
-  del('public/dist/*');
-})
+* Task gulp-watch
 */
+gulp.task('watch', ['browserSync'], function () {
+    gulp.watch(['public/styles/**/*.less'], ['less']);
+    gulp.watch('public/**/*.html', browserSync.reload);
+    gulp.watch('public/js/main.min.js', browserSync.reload);
+    //gulp.watch(['public/js/**/*.js','public/js/**/*.json'],['js']).on('change', browserSync.reload);
+});
 
 
 /**
 * Task dist: Copy to dist folder for production
-
-gulp.task('dist', ['clean', 'less-dist', 'html' , 'js', 'images'], function (){
-    console.log('Building dist folder');
-})
 */
+gulp.task('dist', ['del-dist', 'make-dist']);
