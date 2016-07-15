@@ -1,5 +1,7 @@
 vendor/*
 public/vendor/*
+
+public/dist/vendor/*
 composer.lock
 
 .DS_Store
