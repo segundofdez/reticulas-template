@@ -12,11 +12,21 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 
 mix.js('src/js/main.js', 'public/js')
     .less('src/styles/main.less', 'public/css')
+    .options({
+        postCss: [
+            require('autoprefixer')({
+                browsers: '>5%'
+            }),
+        ]
+    })
     .combine([
         'node_modules/normalize.css/normalize.css',
         'public/css/main.css'],
         'public/css/main.min.css')
-    .browserSync('0.0.0.0:8181')
+    .browserSync({
+        proxy: '0.0.0.0:8181',
+        files: ['public/*.html', 'public/css/*.css', 'public/js/*.js']
+    })
 ;
 
 //Only in production, you can remove if you want to use "npm run watch"
