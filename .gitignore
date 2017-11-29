@@ -1,10 +1,4 @@
-vendor/*
-public/vendor/*
-
-public/dist/vendor/*
-composer.lock
-
-.DS_Store
-
 node_modules
 npm-debug.log
+mix-manifest.json
+public/css/main.css
