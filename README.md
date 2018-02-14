@@ -11,10 +11,6 @@ Simple static site generator
 Run on root folder:
 
 ```
-php -S 0.0.0.0:8181 -t public
-```
-
-```
 npm run watch
 ```
 
