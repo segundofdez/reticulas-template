@@ -1,5 +1,5 @@
 node_modules
 npm-debug.log
+public
 mix-manifest.json
-public/css/main.css
 package-lock.json

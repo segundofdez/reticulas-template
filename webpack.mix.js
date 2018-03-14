@@ -14,8 +14,8 @@ const handlebarsLoader = require('handlebars-loader');
  |
  */
 
-mix.js('src/js/main.js', 'public/js')
-    mix.less('src/styles/main.less', 'public/css')
+mix.js('src/js/main.js', __dirname +'public/js')
+    .less('src/styles/main.less', 'css')
     .options({
         postCss: [
             require('autoprefixer')({
@@ -25,7 +25,7 @@ mix.js('src/js/main.js', 'public/js')
     })
     .combine(
         ['node_modules/normalize.css/normalize.css','public/css/main.css'],
-        'public/css/main.min.css'
+        'public/css/main.css'
     )
 ;
 
@@ -67,7 +67,7 @@ mix.webpackConfig({
         }),
         new CopyWebpackPlugin([{
             from: 'src/img',
-            to: 'public/img',
+            to: __dirname + '/public/img',
         }]),
         new ImageminPlugin({
             test: /\.(jpe?g|png|gif|svg)$/i,
