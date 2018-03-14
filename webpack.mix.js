@@ -3,6 +3,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 let ImageminPlugin = require( 'imagemin-webpack-plugin' ).default;
 const imageminMozjpeg = require('imagemin-mozjpeg');
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const handlebars = require('handlebars');
+const handlebarsLoader = require('handlebars-loader');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,7 +15,7 @@ var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
  */
 
 mix.js('src/js/main.js', 'public/js')
-    .less('src/styles/main.less', 'public/css')
+    mix.less('src/styles/main.less', 'public/css')
     .options({
         postCss: [
             require('autoprefixer')({
@@ -20,15 +23,42 @@ mix.js('src/js/main.js', 'public/js')
             }),
         ]
     })
-    .combine([
-        'node_modules/normalize.css/normalize.css',
-        'public/css/main.css'],
+    .combine(
+        ['node_modules/normalize.css/normalize.css','public/css/main.css'],
         'public/css/main.min.css'
     )
 ;
 
+
 mix.webpackConfig({
+    /*
+    output: {
+        path: __dirname + '/public',
+        filename: 'index_bundle.js'
+    },
+    */
+    module: {
+        loaders: [
+            { test: /\.hbs$/, loader: "handlebars" }
+        ]
+    },
+    output: {
+        path: __dirname + '/public',
+        filename: 'js/main.js'
+    },
     plugins: [
+        new HtmlWebpackPlugin({
+            title: 'Custom template using Handlebars',
+            template: 'src/index.hbs',
+        }),
+
+        /*
+        new HtmlWebpackPlugin(), // Generates default index.html
+        new HtmlWebpackPlugin({  // Also generate a test.html
+            filename: 'test.html',
+            template: 'src/assets/test.html'
+        }),
+        */
         new BrowserSyncPlugin({
             host: 'localhost',
             port: 3000,
