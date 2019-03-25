@@ -22,6 +22,8 @@ mix.js('src/js/main.js', 'public/js')
     })
     .combine([
         'node_modules/normalize.css/normalize.css',
+        'node_modules/owl.carousel/dist/assets/owl.carousel.min.css',
+        'node_modules/owl.carousel/dist/assets/owl.theme.default.css',
         'public/css/main.css'],
         'public/css/main.min.css'
     )
